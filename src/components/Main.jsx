@@ -4,15 +4,34 @@ const Main = (props) => {
   const { titleName, photos } = props;
   const url = "https://placehold.co/600x400";
   console.log(props);
+
+  const sortedPhotos = photos.sort((a, b) => b.price - a.price);
+
+  const filterData = sortedPhotos.filter((photo)=> photo.price >= 200)
+
+  const getDataFromChild = (photoDetail) => {
+    console.log(photoDetail)
+  }
+
+  const photosList = filterData.map(
+    (photo, index) =>
+      photo.showData && (
+        <Card
+          key={index}
+          title={photo.title}
+          thumbnailUrl={url}
+          url={photo.url}
+          price={photo.price}
+          getPhotoData={getDataFromChild}
+        />
+      )
+  );
+
+
   return (
     <main className="container">
       <h4>{titleName}</h4>
-
-      <div className="photo-container">
-        <Card title={photos[0].title} thumbnailUrl={url} url={photos[0].url} />
-        <Card title={photos[1].title} thumbnailUrl={url} url={photos[1].url} />
-        <Card title={photos[2].title} thumbnailUrl={url} url={photos[2].url} />
-      </div>
+      <div className="photo-container">{photosList}</div>
     </main>
   );
 };

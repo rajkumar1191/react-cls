@@ -12,6 +12,8 @@ function App() {
       title: "accusamus beatae ad facilis cum similique qui sunt",
       url: "https://via.placeholder.com/600/92c952",
       thumbnailUrl: "https://via.placeholder.com/150/92c952",
+      showData: true,
+      price: 100,
     },
     {
       albumId: 1,
@@ -19,6 +21,8 @@ function App() {
       title: "reprehenderit est deserunt velit ipsam",
       url: "https://via.placeholder.com/600/771796",
       thumbnailUrl: "https://via.placeholder.com/150/771796",
+      showData: true,
+      price: 150,
     },
     {
       albumId: 1,
@@ -26,6 +30,8 @@ function App() {
       title: "officia porro iure quia iusto qui ipsa ut modi",
       url: "https://via.placeholder.com/600/24f355",
       thumbnailUrl: "https://via.placeholder.com/150/24f355",
+      showData: false,
+      price: 300,
     },
     {
       albumId: 1,
@@ -33,6 +39,8 @@ function App() {
       title: "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
       url: "https://via.placeholder.com/600/d32776",
       thumbnailUrl: "https://via.placeholder.com/150/d32776",
+      showData: true,
+      price: 100,
     },
     {
       albumId: 1,
@@ -40,6 +48,8 @@ function App() {
       title: "natus nisi omnis corporis facere molestiae rerum in",
       url: "https://via.placeholder.com/600/f66b97",
       thumbnailUrl: "https://via.placeholder.com/150/f66b97",
+      showData: true,
+      price: 200,
     },
     {
       albumId: 1,
@@ -47,6 +57,8 @@ function App() {
       title: "accusamus ea aliquid et amet sequi nemo",
       url: "https://via.placeholder.com/600/56a8c2",
       thumbnailUrl: "https://via.placeholder.com/150/56a8c2",
+      showData: true,
+      price: 500,
     },
   ];
 
