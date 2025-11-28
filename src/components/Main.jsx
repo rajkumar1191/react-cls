@@ -1,7 +1,9 @@
+import AddPhoto from "./AddPhoto";
 import Card from "./Card";
 import "./Main.css";
+
 const Main = (props) => {
-  const { titleName, photos } = props;
+  const { titleName, photos, getPhoto } = props;
   const url = "https://placehold.co/600x400";
   console.log(props);
 
@@ -19,7 +21,7 @@ const Main = (props) => {
         <Card
           key={index}
           title={photo.title}
-          thumbnailUrl={url}
+          thumbnailUrl={photo.thumbnailUrl || url}
           url={photo.url}
           price={photo.price}
           getPhotoData={getDataFromChild}
@@ -31,6 +33,7 @@ const Main = (props) => {
   return (
     <main className="container">
       <h4>{titleName}</h4>
+      <AddPhoto passPhotoData={getPhoto} />
       <div className="photo-container">{photosList}</div>
     </main>
   );
