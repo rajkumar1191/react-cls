@@ -1,4 +1,5 @@
 import AddPhoto from "./AddPhoto";
+import AddPhotoReducer from "./AddPhotoReducer";
 import Card from "./Card";
 import "./Main.css";
 
@@ -34,6 +35,7 @@ const Main = (props) => {
     <main className="container">
       <h4>{titleName}</h4>
       <AddPhoto passPhotoData={getPhoto} />
+      <AddPhotoReducer passPhotoData={getPhoto} />
       <div className="photo-container">{photosList}</div>
     </main>
   );
