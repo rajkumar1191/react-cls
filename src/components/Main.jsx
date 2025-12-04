@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import AddPhoto from "./AddPhoto";
 import AddPhotoReducer from "./AddPhotoReducer";
 import Card from "./Card";
@@ -8,28 +9,32 @@ const Main = (props) => {
   const url = "https://placehold.co/600x400";
   console.log(props);
 
-  const sortedPhotos = photos.sort((a, b) => b.price - a.price);
+  let [photoList, setPhoto] = useState(photos || []);
+  // const sortedPhotos = photos.sort((a, b) => b.price - a.price);
 
-  const filterData = sortedPhotos.filter((photo)=> photo.price >= 200)
+  // const filterData = sortedPhotos.filter((photo)=> photo.price >= 200)
+
+  useEffect(() => {
+    setPhoto(photos);
+  }, [photos]);
 
   const getDataFromChild = (photoDetail) => {
-    console.log(photoDetail)
-  }
+    console.log(photoDetail);
+  };
 
-  const photosList = filterData.map(
+  const photosList = photoList.map(
     (photo, index) =>
-      photo.showData && (
+      photo.albumId && (
         <Card
           key={index}
           title={photo.title}
-          thumbnailUrl={photo.thumbnailUrl || url}
-          url={photo.url}
-          price={photo.price}
+          thumbnailUrl={url}
+          url={photo.url || ""}
+          price={photo.price || 0}
           getPhotoData={getDataFromChild}
         />
       )
   );
-
 
   return (
     <main className="container">

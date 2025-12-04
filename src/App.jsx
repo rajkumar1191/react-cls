@@ -1,77 +1,75 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import axios from "axios";
 
 function App() {
   const title = "Course List";
-  let photoList = [
-    {
-      albumId: 1,
-      id: 1,
-      title: "accusamus beatae ad facilis cum similique qui sunt",
-      url: "https://via.placeholder.com/600/92c952",
-      thumbnailUrl: "",
-      showData: true,
-      price: 100,
-    },
-    {
-      albumId: 1,
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "",
-      showData: true,
-      price: 150,
-    },
-    {
-      albumId: 1,
-      id: 3,
-      title: "officia porro iure quia iusto qui ipsa ut modi",
-      url: "https://via.placeholder.com/600/24f355",
-      thumbnailUrl: "",
-      showData: false,
-      price: 300,
-    },
-    {
-      albumId: 1,
-      id: 4,
-      title: "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
-      url: "https://via.placeholder.com/600/d32776",
-      thumbnailUrl: "",
-      showData: true,
-      price: 100,
-    },
-    {
-      albumId: 1,
-      id: 5,
-      title: "natus nisi omnis corporis facere molestiae rerum in",
-      url: "https://via.placeholder.com/600/f66b97",
-      thumbnailUrl: "",
-      showData: true,
-      price: 200,
-    },
-    {
-      albumId: 1,
-      id: 6,
-      title: "accusamus ea aliquid et amet sequi nemo",
-      url: "https://via.placeholder.com/600/56a8c2",
-      thumbnailUrl: "",
-      showData: true,
-      price: 500,
-    },
-  ];
-  const [photos, setPhotos] = useState(photoList);
+  const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    // fetch("https://jsonplaceholder.typicode.com/photos")
+    //   .then((res) => res.json())
+    //   .then((data) => setPhotos(data))
+    //   .catch((err) => console.error(err.message));
+
+    // const loadData = async () => {
+    //   try {
+    //     const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+    //     const data = await res.json();
+    //     setPhotos(data);
+    //   } catch (err) {
+    //     console.error(err.message);
+    //   }
+    // };
+
+    // loadData();
+
+    let mounted = true;
+    const controller = new AbortController(); //
+
+    const loadData = async () => {
+      try {
+        const res = await axios.get(
+          "https://jsonplaceholder.typicode.com/photos",
+          {
+            signal: controller.signal,
+          }
+        );
+        if (mounted) setPhotos(res.data);
+      } catch (err) {
+        if (!axios.isCancel?.(err)) setError("Failed to load data");
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+
+    loadData();
+
+    return () => {
+      mounted = false;
+      controller.abort();
+    };
+  }, []);
 
   const getPhotoData = (photo) => {
     setPhotos((prev) => [...prev, photo]);
+    console.log(photos);
   };
 
   return (
     <>
       <Header />
-      <Main titleName={title} photos={photos} getPhoto={getPhotoData} />
+      {error && <p>{error}</p>}
+      {loading ? (
+        <>Loading....</>
+      ) : (
+        <Main titleName={title} photos={photos} getPhoto={getPhotoData} />
+      )}
       <Footer />
     </>
   );
