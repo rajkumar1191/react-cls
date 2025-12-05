@@ -32,7 +32,7 @@ function App() {
     let mounted = true;
     const controller = new AbortController(); //
 
-    const loadData = async () => {
+    const loadData = async () => {``
       try {
         const res = await axios.get(
           "https://jsonplaceholder.typicode.com/photos",

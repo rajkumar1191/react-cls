@@ -3,6 +3,8 @@ import AddPhoto from "./AddPhoto";
 import AddPhotoReducer from "./AddPhotoReducer";
 import Card from "./Card";
 import "./Main.css";
+import AddPhotoRef from "./AddPhotoUse";
+import CheckCount from "./CheckCount";
 
 const Main = (props) => {
   const { titleName, photos, getPhoto } = props;
@@ -39,6 +41,8 @@ const Main = (props) => {
   return (
     <main className="container">
       <h4>{titleName}</h4>
+      <CheckCount />
+      <AddPhotoRef />
       <AddPhoto passPhotoData={getPhoto} />
       <AddPhotoReducer passPhotoData={getPhoto} />
       <div className="photo-container">{photosList}</div>
