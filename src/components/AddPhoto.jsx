@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "./UserContext";
 
 const AddPhoto = (props) => {
-  const {passPhotoData} = props;
+  const { user } = useContext(UserContext);
+  const { passPhotoData } = props;
   const [formData, setFormData] = useState({
     albumId: 1,
     title: "",
@@ -26,20 +28,31 @@ const AddPhoto = (props) => {
       url: formData.url,
       showData: true,
       price: Number(formData.price),
-      thumbnailUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/1200px-React_Logo_SVG.svg.png",
+      thumbnailUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/1200px-React_Logo_SVG.svg.png",
     };
 
     passPhotoData(formattedFormData);
   };
   return (
     <div>
-      <h3>Add Photo Component</h3>
+      <h3>Add Photo Component for {user.name}</h3>
       <form onSubmit={handleSubmit}>
         <label>Album Id</label>
-        <input type="text" name="albumId" value={formData.albumId} onChange={handleChange} />
+        <input
+          type="text"
+          name="albumId"
+          value={formData.albumId}
+          onChange={handleChange}
+        />
         <br />
         <label>Title</label>
-        <input type="text" name="title" value={formData.title} onChange={handleChange} />
+        <input
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+        />
         <br />
         <label>URL</label>
         <input

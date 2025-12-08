@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import axios from "axios";
+import CallBackParent from "./components/CallBackParent";
+import UserProvider from "./components/UserProvider";
 
 function App() {
   const title = "Course List";
@@ -32,7 +34,8 @@ function App() {
     let mounted = true;
     const controller = new AbortController(); //
 
-    const loadData = async () => {``
+    const loadData = async () => {
+      ``;
       try {
         const res = await axios.get(
           "https://jsonplaceholder.typicode.com/photos",
@@ -61,17 +64,24 @@ function App() {
     console.log(photos);
   };
 
+  //React.memo -> for component memoization -> pure component/functional component -
+  //useCallback -> for function memoization ->
+  //useMemo -> for value memoization
+
   return (
-    <>
+    <UserProvider>
       <Header />
       {error && <p>{error}</p>}
       {loading ? (
         <>Loading....</>
       ) : (
-        <Main titleName={title} photos={photos} getPhoto={getPhotoData} />
+        <>
+          <CallBackParent />
+          <Main titleName={title} photos={photos} getPhoto={getPhotoData} />
+        </>
       )}
       <Footer />
-    </>
+    </UserProvider>
   );
 }
 

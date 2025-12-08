@@ -151,3 +151,11 @@ const AddPhotoReducer = (props) => {
 };
 
 export default AddPhotoReducer;
+
+
+/*
+
+app -> name -> main -> child-> grandchild -> great grandchild -> property drilling -> context api/redux
+
+
+*/
