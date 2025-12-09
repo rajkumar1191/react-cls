@@ -1,21 +1,26 @@
 import styles from "./Header.module.css";
 import React, { useContext } from "react";
-import { UserContext } from "./UserContext";
+import { AuthContext } from "./AuthContext";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { user, login, logout } = useContext(UserContext);
-  console.log(user);
+  const { isLoggedIn, logout } = useContext(AuthContext);
   return (
     <header className={styles.header}>
-      <h1 style={{ textTransform: "uppercase" }}>
-        Welcome {user.name} to My React App
-      </h1>
+      <h1 style={{ textTransform: "uppercase" }}>Welcome to My React App</h1>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>{" "}
+        </li>
+        <li>
+          <Link to="/addphoto">Add Photo</Link>{" "}
+        </li>
+        <li>
+          <Link to="/gallery">Gallery</Link>{" "}
+        </li>
+      </ul>
       <span>
-        {user.isLoggedIn ? (
-          <button onClick={logout}>Logout</button>
-        ) : (
-          <button onClick={() => login("Jane Smith")}>Login</button>
-        )}
+        {isLoggedIn ? <button onClick={logout}>Logout</button> : null}
       </span>
     </header>
   );
