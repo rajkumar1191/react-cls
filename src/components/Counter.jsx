@@ -10,7 +10,7 @@ export default function Counter() {
   return (
     <div style={{ padding: 16 }}>
       <h3>Counter</h3>
-      <div>Value: {count}</div>
+      <div data-testid="count">{count}</div>
 
       <div style={{ marginTop: 8 }}>
         <button onClick={() => dispatch(decrement())}>-</button>
