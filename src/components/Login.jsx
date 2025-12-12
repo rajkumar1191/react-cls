@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
+import ReactDom from 'react-dom';
 
 function Login() {
   const { login } = useContext(AuthContext);
@@ -11,11 +12,12 @@ function Login() {
     navigate("/");
   };
 
-  return (
+  return ReactDom.createPortal(
     <div>
       <h2>Login Page</h2>
       <button onClick={handleLogin}>Login</button>
-    </div>
+    </div>,
+    document.getElementById("portal")
   );
 }
 
